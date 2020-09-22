@@ -1,16 +1,18 @@
 import React from 'react';
 
-const SetCard = ({ card }: any) => <div>{`${card.color}-${card.number}-${card.shape}-${card.shading}`}</div>;
+import styles from './board.module.css';
+
+const SetCard = ({ card }: any) => <div className={styles.card}>{`${card.color}-${card.number}-${card.shape}-${card.shading}`}</div>;
 
 const SetBoardRow = ({ cards }: any) => (
-  <div>
+  <div className={styles.row}>
     {cards.map((card: any) => <SetCard card={card} />)}
   </div>
 );
 
 export const SetBoard = ({ G }: any) => {
   return (
-    <div>
+    <div className={styles.board}>
       <SetBoardRow cards={G.board.slice(0, 4)}/>
       <br />
       <SetBoardRow cards={G.board.slice(4, 8)}/>

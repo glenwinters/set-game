@@ -12,24 +12,28 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
       padding: theme.spacing(3),
-    }
+    },
+    card: {
+      width: 200 + 32,
+    },
   })
 );
 
 // TODO: Move SetCard to its own file and give it props
 const SetCard: React.FC = () => {
- return (
-  <Card>
-    <CardContent>
-      <svg width="300" height="100">
-        <ellipse cx={50} cy={50} rx={25} ry={50} fill="purple" />
-        <ellipse cx={150} cy={50} rx={25} ry={50} fill="purple" />
-        <ellipse cx={250} cy={50} rx={25} ry={50} fill="purple" />
-      </svg>
-    </CardContent>
-  </Card>
- );
-}
+  const classes = useStyles();
+  return (
+    <Card className={classes.card}>
+      <CardContent>
+        <svg width="200" height="100">
+          <ellipse cx={25} cy={50} rx={25} ry={50} fill="purple" />
+          <ellipse cx={100} cy={50} rx={25} ry={50} fill="purple" />
+          <ellipse cx={175} cy={50} rx={25} ry={50} fill="purple" />
+        </svg>
+      </CardContent>
+    </Card>
+  );
+};
 
 // TODO: How will we map an array of things to this grid since the 12 items are
 // broken up by Grid containers?
@@ -49,54 +53,56 @@ const App: React.FC = () => {
 
   const classes = useStyles();
 
+  const justify = 'center';
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs>
+        <Grid container spacing={5} justify={justify}>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
-            <SetCard />
-          </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs>
-            <SetCard />
-          </Grid>
-          <Grid item xs>
-            <SetCard />
-          </Grid>
-          <Grid item xs>
-            <SetCard />
-          </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs>
+        <Grid container spacing={5} justify={justify}>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={2}>
+            <SetCard />
+          </Grid>
+        </Grid>
+        <Grid container spacing={5} justify={justify}>
+          <Grid item xs={2}>
+            <SetCard />
+          </Grid>
+          <Grid item xs={2}>
+            <SetCard />
+          </Grid>
+          <Grid item xs={2}>
+            <SetCard />
+          </Grid>
+          <Grid item xs={2}>
             <SetCard />
           </Grid>
         </Grid>
       </div>
-      </ThemeProvider>
+    </ThemeProvider>
   );
 };
 

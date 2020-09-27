@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -22,7 +21,11 @@ const SetCard: React.FC = () => {
  return (
   <Card>
     <CardContent>
-      <Typography align="center">~ ~ ~</Typography>
+      <svg width="300" height="100">
+        <ellipse cx={50} cy={50} rx={25} ry={50} fill="purple" />
+        <ellipse cx={150} cy={50} rx={25} ry={50} fill="purple" />
+        <ellipse cx={250} cy={50} rx={25} ry={50} fill="purple" />
+      </svg>
     </CardContent>
   </Card>
  );

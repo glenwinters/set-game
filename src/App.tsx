@@ -19,18 +19,95 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+// TODO: Refactor these by pulling out the random selection logic into
+// randomItem that picks from a list. However, this is just for messing around
+// so it doesn't really matter
+const randomColor = () => {
+  const colors = ['green', 'red', 'purple'] as const;
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+};
+
+const randomShape = () => {
+  const shapes = ['oval', 'diamond', 'squiggle'] as const;
+  const randomIndex = Math.floor(Math.random() * shapes.length);
+  return shapes[randomIndex];
+};
+
+const randomNumber = () => {
+  const numbers = [1, 2, 3] as const;
+  const randomIndex = Math.floor(Math.random() * numbers.length);
+  return numbers[randomIndex];
+};
+
+const randomShading = () => {
+  const shadings = [1, 2, 3] as const;
+  const randomIndex = Math.floor(Math.random() * shadings.length);
+  return shadings[randomIndex];
+};
+
+interface SetCardProps {
+  color?: 'green' | 'red' | 'purple';
+  shape?: 'oval' | 'diamond' | 'squiggle';
+  number?: 1 | 2 | 3;
+  shading?: 'fill' | 'outline' | 'striped';
+}
+
 // TODO: Move SetCard to its own file and give it props
-const SetCard: React.FC = () => {
+const SetCard: React.FC<SetCardProps> = ({
+  color = randomColor(),
+  shape = randomShape(),
+  number = randomNumber(),
+  shading = randomShading(),
+}) => {
   const classes = useStyles();
+  // TODO: Refactor this to not duplicate the shapes
+  // TODO: Change the 2 to be centered
+  // TODO: Add shading https://stackoverflow.com/questions/13069446/simple-fill-pattern-in-svg-diagonal-hatching
+  const shapes = {
+    oval: (
+      <svg width="200" height="100">
+        {number > 1 ? (
+          <ellipse cx={25} cy={50} rx={25} ry={50} fill={color} />
+        ) : null}
+        {number !== 2 ? (
+          <ellipse cx={100} cy={50} rx={25} ry={50} fill={color} />
+        ) : null}
+        {number > 1 ? (
+          <ellipse cx={175} cy={50} rx={25} ry={50} fill={color} />
+        ) : null}
+      </svg>
+    ),
+    diamond: (
+      <svg width="200" height="100">
+        {number > 1 ? (
+          <polygon points="25,0 50,50 25,100 0,50" fill={color} />
+        ) : null}
+        {number !== 2 ? (
+          <polygon points="100,0 125,50 100,100 75,50" fill={color} />
+        ) : null}
+        {number > 1 ? (
+          <polygon points="175,0 200,50 175,100 150,50" fill={color} />
+        ) : null}
+      </svg>
+    ),
+    squiggle: (
+      <svg width="200" height="100">
+        <defs>
+          <path
+            id="squiggle"
+            d="m8.38729,1.46539c-5.80734,1.9723 -8.82058,5.75255 -8.16315,10.13545c0.21914,1.31487 1.42444,3.99939 2.73931,6.13606c5.64298,9.09451 6.90306,12.43647 6.90306,18.40817c0,4.32811 -0.82179,7.34135 -4.10897,15.77843c-4.05418,10.3546 -5.42384,18.6821 -4.16375,25.4756c2.41059,12.98434 14.40878,21.80492 29.63935,21.80492c8.82058,0 15.72365,-3.23239 17.86031,-8.32751c1.47923,-3.5611 1.04094,-6.51956 -1.75316,-11.01203c-3.45153,-5.5882 -5.04033,-9.31366 -6.02648,-13.86092c-0.87658,-4.3829 -0.43829,-7.99879 1.53401,-12.38169c3.06803,-6.79349 4.27333,-12.54605 4.27333,-20.21612c-0.05479,-8.43708 -1.42444,-13.47741 -5.25948,-19.28475c-3.83504,-5.91691 -11.1216,-10.90246 -18.6821,-12.87476c-4.27333,-1.09572 -11.23118,-1.04094 -14.79228,0.21914z"
+          />
+        </defs>
+        {number > 1 ? <use href="#squiggle" fill={color} /> : null}
+        {number !== 2 ? <use href="#squiggle" x="75" fill={color} /> : null}
+        {number > 1 ? <use href="#squiggle" x="150" fill={color} /> : null}
+      </svg>
+    ),
+  };
   return (
     <Card className={classes.card}>
-      <CardContent>
-        <svg width="200" height="100">
-          <ellipse cx={25} cy={50} rx={25} ry={50} fill="purple" />
-          <ellipse cx={100} cy={50} rx={25} ry={50} fill="purple" />
-          <ellipse cx={175} cy={50} rx={25} ry={50} fill="purple" />
-        </svg>
-      </CardContent>
+      <CardContent>{shapes[shape]}</CardContent>
     </Card>
   );
 };

@@ -140,11 +140,15 @@ const RemainingDeck: React.FC = () => {
   );
 };
 
-const ScorePile: React.FC = () => {
+interface ScorePileProps {
+  setsCollected?: number;
+}
+
+const ScorePile: React.FC<ScorePileProps> = ({setsCollected = 0}) => {
   const classes = useStyles();
   return (
     <Card className={classes.scorePile}>
-      <CardContent>{81 - 12}</CardContent>
+      <CardContent>{setsCollected}</CardContent>
     </Card>
   );
 };

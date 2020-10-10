@@ -16,6 +16,21 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       width: 200 + 32,
     },
+    remainingDeck: {
+      width: 200 + 32,
+      backgroundColor: '#aaaaaa',
+      color: 'white',
+    },
+    scorePile: {
+      width: 200 + 32,
+      height: 145,
+      fontSize: '5em',
+      textAlign: 'center',
+      backgroundColor: '#aaaaaa',
+      color: 'white',
+      WebkitTextStrokeWidth: '2px',
+      WebkitTextStrokeColor: '#555555',
+    },
   })
 );
 
@@ -112,6 +127,37 @@ const SetCard: React.FC<SetCardProps> = ({
   );
 };
 
+const RemainingDeck: React.FC = () => {
+  const classes = useStyles();
+  return (
+    <Card className={classes.remainingDeck}>
+      <CardContent>
+        <svg width="200" height="100">
+          <polyline
+            points="10,90 10,10 190,90 190,10"
+            stroke="black"
+            strokeWidth="6px"
+            fill="none"
+          />
+        </svg>
+      </CardContent>
+    </Card>
+  );
+};
+
+interface ScorePileProps {
+  setsCollected?: number;
+}
+
+const ScorePile: React.FC<ScorePileProps> = ({ setsCollected = 0 }) => {
+  const classes = useStyles();
+  return (
+    <Card className={classes.scorePile}>
+      <CardContent>{setsCollected}</CardContent>
+    </Card>
+  );
+};
+
 // TODO: How will we map an array of things to this grid since the 12 items are
 // broken up by Grid containers?
 const App: React.FC = () => {
@@ -176,6 +222,14 @@ const App: React.FC = () => {
           </Grid>
           <Grid item xs={2}>
             <SetCard />
+          </Grid>
+        </Grid>
+        <Grid container spacing={5} justify={justify}>
+          <Grid item xs={2}>
+            <RemainingDeck />
+          </Grid>
+          <Grid item xs={2}>
+            <ScorePile />
           </Grid>
         </Grid>
       </div>

@@ -18,18 +18,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     remainingDeck: {
       width: 200 + 32,
-      backgroundColor: "#aaaaaa",
-      color: "white"
+      backgroundColor: '#aaaaaa',
+      color: 'white',
     },
     scorePile: {
       width: 200 + 32,
       height: 145,
-      fontSize: "5em",
+      fontSize: '5em',
       textAlign: 'center',
-      backgroundColor: "#aaaaaa",
-      color: "white",
-      WebkitTextStrokeWidth: "2px",
-      WebkitTextStrokeColor: "#555555"
+      backgroundColor: '#aaaaaa',
+      color: 'white',
+      WebkitTextStrokeWidth: '2px',
+      WebkitTextStrokeColor: '#555555',
     },
   })
 );
@@ -133,7 +133,12 @@ const RemainingDeck: React.FC = () => {
     <Card className={classes.remainingDeck}>
       <CardContent>
         <svg width="200" height="100">
-          <polyline points="10,90 10,10 190,90 190,10" stroke="black" strokeWidth="6px" fill="none" />
+          <polyline
+            points="10,90 10,10 190,90 190,10"
+            stroke="black"
+            strokeWidth="6px"
+            fill="none"
+          />
         </svg>
       </CardContent>
     </Card>
@@ -144,7 +149,7 @@ interface ScorePileProps {
   setsCollected?: number;
 }
 
-const ScorePile: React.FC<ScorePileProps> = ({setsCollected = 0}) => {
+const ScorePile: React.FC<ScorePileProps> = ({ setsCollected = 0 }) => {
   const classes = useStyles();
   return (
     <Card className={classes.scorePile}>
